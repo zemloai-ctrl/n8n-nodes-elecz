@@ -28,128 +28,114 @@ export class Elecz implements INodeType {
 				noDataExpression: true,
 				options: [
 					{
+						name: 'Optimize',
+						value: 'optimize',
+						description: 'Best action right now: run_now / delay / switch_contract / monitor',
+						action: 'Get optimization signal',
+					},
+					{
 						name: 'Spot Price',
 						value: 'spot_price',
 						description: 'Get current electricity spot price for a zone',
 						action: 'Get spot price',
 					},
 					{
-						name: 'Best Energy Contract',
-						value: 'best_energy_contract',
-						description: 'Find the best electricity contract for your consumption',
-						action: 'Find best energy contract',
-					},
-					{
 						name: 'Cheapest Hours',
 						value: 'cheapest_hours',
-						description: 'Get the cheapest upcoming hours to use energy',
+						description: 'Get the cheapest upcoming hours in the next 24h',
 						action: 'Get cheapest hours',
 					},
 					{
 						name: 'Energy Decision Signal',
 						value: 'energy_decision_signal',
-						description: 'Get a full energy decision signal for a zone',
+						description: 'Full signal: price, contracts, state, recommendation',
 						action: 'Get energy decision signal',
 					},
 					{
-						name: 'Optimize',
-						value: 'optimize',
-						description: 'Get a one-call electricity optimization recommendation',
-						action: 'Optimize electricity usage',
+						name: 'Best Energy Contract',
+						value: 'best_energy_contract',
+						description: 'Top 3 contracts ranked by your consumption profile',
+						action: 'Find best energy contract',
 					},
 				],
-				default: 'spot_price',
+				default: 'optimize',
 			},
-
-			// Zone — shared across all operations
 			{
 				displayName: 'Zone',
 				name: 'zone',
 				type: 'options',
 				options: [
 					{ name: 'Finland (FI)', value: 'FI' },
-					{ name: 'Sweden (SE1)', value: 'SE1' },
-					{ name: 'Sweden (SE2)', value: 'SE2' },
-					{ name: 'Sweden (SE3)', value: 'SE3' },
-					{ name: 'Sweden (SE4)', value: 'SE4' },
-					{ name: 'Norway (NO1)', value: 'NO1' },
-					{ name: 'Norway (NO2)', value: 'NO2' },
-					{ name: 'Norway (NO5)', value: 'NO5' },
-					{ name: 'Denmark (DK1)', value: 'DK1' },
-					{ name: 'Denmark (DK2)', value: 'DK2' },
-					{ name: 'Estonia (EE)', value: 'EE' },
-					{ name: 'Latvia (LV)', value: 'LV' },
-					{ name: 'Lithuania (LT)', value: 'LT' },
-					{ name: 'Germany (DE-LU)', value: 'DE-LU' },
+					{ name: 'Sweden (SE)', value: 'SE' },
+					{ name: 'Sweden SE1', value: 'SE1' },
+					{ name: 'Sweden SE2', value: 'SE2' },
+					{ name: 'Sweden SE3', value: 'SE3' },
+					{ name: 'Sweden SE4', value: 'SE4' },
+					{ name: 'Norway (NO)', value: 'NO' },
+					{ name: 'Norway NO1', value: 'NO1' },
+					{ name: 'Norway NO2', value: 'NO2' },
+					{ name: 'Norway NO5', value: 'NO5' },
+					{ name: 'Denmark (DK)', value: 'DK' },
+					{ name: 'Denmark DK1', value: 'DK1' },
+					{ name: 'Denmark DK2', value: 'DK2' },
+					{ name: 'Germany (DE)', value: 'DE' },
 				],
 				default: 'FI',
 				description: 'Electricity price zone',
 				displayOptions: {
 					show: {
-						operation: ['spot_price', 'best_energy_contract', 'cheapest_hours', 'energy_decision_signal', 'optimize'],
+						operation: ['optimize', 'spot_price', 'cheapest_hours', 'energy_decision_signal', 'best_energy_contract'],
 					},
 				},
 			},
-
-			// Consumption — for contract and optimize
 			{
 				displayName: 'Annual Consumption (kWh)',
-				name: 'consumption_kwh',
+				name: 'consumption',
 				type: 'number',
 				default: 2000,
-				description: 'Your annual electricity consumption in kWh. Nordic default: 2000, German default: 3500.',
+				description: 'Annual electricity consumption in kWh. Nordic default: 2000, Germany default: 3500.',
 				displayOptions: {
 					show: {
-						operation: ['best_energy_contract', 'optimize'],
+						operation: ['optimize', 'energy_decision_signal', 'best_energy_contract'],
 					},
 				},
 			},
-
-			// Contract type filter
-			{
-				displayName: 'Contract Type',
-				name: 'contract_type',
-				type: 'options',
-				options: [
-					{ name: 'Any', value: '' },
-					{ name: 'Spot', value: 'spot' },
-					{ name: 'Fixed', value: 'fixed' },
-					{ name: 'Dynamic', value: 'dynamic' },
-					{ name: 'Hybrid', value: 'hybrid' },
-				],
-				default: '',
-				description: 'Filter by contract type (leave empty for all types)',
-				displayOptions: {
-					show: {
-						operation: ['best_energy_contract'],
-					},
-				},
-			},
-
-			// Current price for savings calculation
-			{
-				displayName: 'Current Price (c/kWh)',
-				name: 'current_price_ckwh',
-				type: 'number',
-				default: 0,
-				description: 'Your current electricity price in cents/kWh. Used to calculate potential savings.',
-				displayOptions: {
-					show: {
-						operation: ['best_energy_contract'],
-					},
-				},
-			},
-
-			// Hours needed — for cheapest_hours
 			{
 				displayName: 'Hours Needed',
-				name: 'hours_needed',
+				name: 'hours',
 				type: 'number',
-				default: 3,
-				description: 'How many cheap hours you need in the next 24 hours',
+				default: 5,
+				description: 'How many cheapest hours to return (default 5)',
 				displayOptions: {
 					show: {
 						operation: ['cheapest_hours'],
+					},
+				},
+			},
+			{
+				displayName: 'Look Ahead (hours)',
+				name: 'window',
+				type: 'number',
+				default: 24,
+				description: 'How many hours to look ahead (default 24, max 48)',
+				displayOptions: {
+					show: {
+						operation: ['cheapest_hours'],
+					},
+				},
+			},
+			{
+				displayName: 'Heating Type',
+				name: 'heating',
+				type: 'options',
+				options: [
+					{ name: 'District Heating', value: 'district' },
+					{ name: 'Electric Heating', value: 'electric' },
+				],
+				default: 'district',
+				displayOptions: {
+					show: {
+						operation: ['energy_decision_signal', 'best_energy_contract'],
 					},
 				},
 			},
@@ -169,27 +155,58 @@ export class Elecz implements INodeType {
 			const params = new URLSearchParams({ zone });
 
 			if (operation === 'spot_price') {
-				url = `${BASE_URL}/spot_price?${params}`;
-
-			} else if (operation === 'best_energy_contract') {
-				const consumption = this.getNodeParameter('consumption_kwh', i) as number;
-				const contractType = this.getNodeParameter('contract_type', i) as string;
-				const currentPrice = this.getNodeParameter('current_price_ckwh', i) as number;
-				params.append('consumption_kwh', String(consumption));
-				if (contractType) params.append('contract_type', contractType);
-				if (currentPrice > 0) params.append('current_price_ckwh', String(currentPrice));
-				url = `${BASE_URL}/best_energy_contract?${params}`;
-
-			} else if (operation === 'cheapest_hours') {
-				const hours = this.getNodeParameter('hours_needed', i) as number;
-				params.append('hours_needed', String(hours));
-				url = `${BASE_URL}/cheapest_hours?${params}`;
-
-			} else if (operation === 'energy_decision_signal') {
-				url = `${BASE_URL}/energy_decision_signal?${params}`;
+				url = `${BASE_URL}/signal/spot?${params}`;
 
 			} else if (operation === 'optimize') {
-				const consumption = this.getNodeParameter('consumption_kwh', i) as number;
-				params.append('consumption_kwh', String(consumption));
-				url = `${BASE_URL}/optimize?${params
+				const consumption = this.getNodeParameter('consumption', i) as number;
+				params.append('consumption', String(consumption));
+				url = `${BASE_URL}/signal/optimize?${params}`;
+
+			} else if (operation === 'cheapest_hours') {
+				const hours = this.getNodeParameter('hours', i) as number;
+				const window = this.getNodeParameter('window', i) as number;
+				params.append('hours', String(hours));
+				params.append('window', String(window));
+				url = `${BASE_URL}/signal/cheapest-hours?${params}`;
+
+			} else if (operation === 'energy_decision_signal') {
+				const consumption = this.getNodeParameter('consumption', i) as number;
+				const heating = this.getNodeParameter('heating', i) as string;
+				params.append('consumption', String(consumption));
+				params.append('heating', heating);
+				url = `${BASE_URL}/signal?${params}`;
+
+			} else if (operation === 'best_energy_contract') {
+				const consumption = this.getNodeParameter('consumption', i) as number;
+				const heating = this.getNodeParameter('heating', i) as string;
+				params.append('consumption', String(consumption));
+				params.append('heating', heating);
+				url = `${BASE_URL}/signal?${params}`;
+			}
+
+			try {
+				const response = await this.helpers.request({
+					method: 'GET',
+					url,
+					json: true,
+				});
+
+				returnData.push({
+					json: response,
+					pairedItem: { item: i },
+				});
+			} catch (error) {
+				if (this.continueOnFail()) {
+					returnData.push({
+						json: { error: (error as Error).message },
+						pairedItem: { item: i },
+					});
+					continue;
+				}
+				throw new NodeOperationError(this.getNode(), error as Error, { itemIndex: i });
+			}
+		}
+
+		return [returnData];
+	}
 }
