@@ -1,0 +1,55 @@
+{
+  "name": "n8n-nodes-elecz",
+  "version": "0.1.0",
+  "description": "n8n community node for Elecz — real-time electricity price signals and contract comparison for Nordic and German markets",
+  "keywords": [
+    "n8n-community-node-package",
+    "electricity",
+    "energy",
+    "nordic",
+    "germany",
+    "elecz",
+    "spot-price",
+    "automation"
+  ],
+  "license": "MIT",
+  "homepage": "https://elecz.com",
+  "author": {
+    "name": "Zemlo AI",
+    "email": "hello@elecz.com",
+    "url": "https://elecz.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zemloai-ctrl/n8n-nodes-elecz"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && gulp build:icons",
+    "dev": "tsc --watch",
+    "format": "prettier nodes --write",
+    "lint": "eslint nodes package.json",
+    "lintfix": "eslint nodes package.json --fix",
+    "prepublishOnly": "npm run build && npm run lint -c .eslintrc.prepublish.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [],
+    "nodes": [
+      "dist/nodes/Elecz/Elecz.node.js"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^18.16.16",
+    "eslint": "^8.49.0",
+    "n8n-workflow": "*",
+    "prettier": "^3.0.3",
+    "typescript": "^5.1.6"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  }
+}
