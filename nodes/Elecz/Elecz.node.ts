@@ -192,3 +192,4 @@ export class Elecz implements INodeType {
 				const consumption = this.getNodeParameter('consumption_kwh', i) as number;
 				params.append('consumption_kwh', String(consumption));
 				url = `${BASE_URL}/optimize?${params
+}
