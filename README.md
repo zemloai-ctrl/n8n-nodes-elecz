@@ -1,21 +1,21 @@
 # n8n-nodes-elecz
 
-An [n8n](https://n8n.io/) community node for [Elecz](https://elecz.com) — real-time electricity price signals and contract comparison for Nordic and German markets.
+An [n8n](https://n8n.io/) community node for [Elecz](https://elecz.com) — real-time electricity price signals and contract comparison for Germany and Nordic markets.
 
 ## Operations
 
 | Operation | Description |
 |---|---|
+| **Optimize** | One-call optimization — best action right now |
 | **Spot Price** | Current electricity spot price for a zone |
-| **Best Energy Contract** | Top 3 contracts ranked by your consumption profile |
 | **Cheapest Hours** | Cheapest upcoming hours in the next 24h |
 | **Energy Decision Signal** | Full decision signal: price level, trend, recommendation |
-| **Optimize** | One-call optimization — best action right now |
+| **Best Energy Contract** | Top 3 contracts ranked by your consumption profile |
 
 ## Supported Zones
 
-**Nordic/Baltic:** FI, SE1–SE4, NO1, NO2, NO5, DK1, DK2, EE, LV, LT  
-**Germany:** DE-LU
+**Germany:** DE  
+**Nordic:** FI, SE, SE1–SE4, NO, NO1–NO5, DK, DK1–DK2
 
 ## Installation
 
@@ -41,9 +41,8 @@ No API key required. Elecz is a public read-only API.
 ### Example: Contract comparison
 
 1. Operation: `Best Energy Contract`
-2. Zone: `FI`
-3. Consumption: `2000` kWh/year
-4. Current price: `7.5` c/kWh → get savings estimate
+2. Zone: `DE`
+3. Consumption: `3500` kWh/year
 
 ## Links
 
