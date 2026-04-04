@@ -27,7 +27,7 @@
   },
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc && mkdir -p dist/nodes/Elecz && cp nodes/Elecz/*.svg dist/nodes/Elecz/ || true",
+    "build": "tsc",
     "dev": "tsc --watch",
     "prepublishOnly": "npm run build"
   },
