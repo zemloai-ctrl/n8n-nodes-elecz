@@ -1,15 +1,17 @@
 {
   "name": "n8n-nodes-elecz",
-  "version": "0.1.0",
-  "description": "n8n community node for Elecz — real-time electricity price signals and contract comparison for Nordic and German markets",
+  "version": "0.1.2",
+  "description": "Elecz — Real-time electricity signals for Germany (DE-LU) and Northern Europe. Optimized for AI agents and automation.",
   "keywords": [
     "n8n-community-node-package",
     "electricity",
     "energy",
+    "germany-energy",
+    "electricity-prices",
     "nordic",
-    "germany",
+    "mcp",
     "elecz",
-    "spot-price",
+    "smart-grid",
     "automation"
   ],
   "license": "MIT",
@@ -21,16 +23,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/zemloai-ctrl/n8n-nodes-elecz"
+    "url": "git+https://github.com/zemloai-ctrl/n8n-nodes-elecz.git"
   },
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "build": "tsc && gulp build:icons",
+    "build": "tsc && mkdir -p dist/nodes/Elecz && cp nodes/Elecz/*.svg dist/nodes/Elecz/ || true",
     "dev": "tsc --watch",
-    "format": "prettier nodes --write",
-    "lint": "eslint nodes package.json",
-    "lintfix": "eslint nodes package.json --fix",
-    "prepublishOnly": "npm run build && npm run lint -c .eslintrc.prepublish.js"
+    "prepublishOnly": "npm run build"
   },
   "files": [
     "dist"
@@ -44,9 +43,7 @@
   },
   "devDependencies": {
     "@types/node": "^18.16.16",
-    "eslint": "^8.49.0",
     "n8n-workflow": "*",
-    "prettier": "^3.0.3",
     "typescript": "^5.1.6"
   },
   "peerDependencies": {
