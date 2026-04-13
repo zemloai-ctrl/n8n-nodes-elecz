@@ -1,16 +1,18 @@
 {
   "name": "n8n-nodes-elecz",
-  "version": "0.1.2",
-  "description": "Elecz — Real-time electricity signals for Germany (DE-LU) and Northern Europe. Optimized for AI agents and automation.",
+  "version": "0.1.5",
+  "description": "Elecz — Real-time electricity price signals and contract recommendations for Europe and Oceania. 8 markets, no authentication required.",
   "keywords": [
     "n8n-community-node-package",
     "electricity",
     "energy",
-    "germany-energy",
+    "australia",
     "electricity-prices",
-    "nordic",
+    "uk",
     "mcp",
     "elecz",
+    "oceania",
+    "Germany",
     "smart-grid",
     "automation"
   ],
