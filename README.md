@@ -1,55 +1,39 @@
-# n8n-nodes-elecz
-
-An [n8n](https://n8n.io/) community node for [Elecz](https://elecz.com) — real-time electricity price signals and contract comparison for Germany and Nordic markets.
-
-## Operations
-
-| Operation | Description |
-|---|---|
-| **Optimize** | One-call optimization — best action right now |
-| **Spot Price** | Current electricity spot price for a zone |
-| **Cheapest Hours** | Cheapest upcoming hours in the next 24h |
-| **Energy Decision Signal** | Full decision signal: price level, trend, recommendation |
-| **Best Energy Contract** | Top 3 contracts ranked by your consumption profile |
-
-## Supported Zones
-
-**Germany:** DE  
-**Nordic:** FI, SE, SE1–SE4, NO, NO1–NO5, DK, DK1–DK2
-
-## Installation
-
+n8n-nodes-elecz
+An n8n community node for Elecz — real-time electricity price signals and contract recommendations for Europe and Oceania.
+Operations
+OperationDescriptionSpot PriceCurrent electricity spot price for a zoneCheapest HoursCheapest upcoming hours in the next 24hBest Energy ContractTop contracts ranked by your consumption profile
+Supported Zones
+Europe: FI, SE, SE1–SE4, NO, NO1–NO5, DK, DK1–DK2, DE, GB
+Oceania: AU-NSW, AU-VIC, AU-QLD, AU-SA, AU-TAS, NZ-NI, NZ-SI
+Installation
 In your n8n instance:
 
-1. Go to **Settings → Community Nodes**
-2. Click **Install**
-3. Enter `n8n-nodes-elecz`
-4. Confirm install
+Go to Settings → Community Nodes
+Click Install
+Enter n8n-nodes-elecz
+Confirm install
 
-## Usage
-
+Usage
 No API key required. Elecz is a public read-only API.
+Example: Cheapest hours automation
 
-### Example: Cheapest hours automation
+Add Elecz node
+Operation: Cheapest Hours
+Zone: FI
+Hours needed: 3
+Connect to your automation
 
-1. Add **Elecz** node
-2. Operation: `Cheapest Hours`
-3. Zone: `FI`
-4. Hours needed: `3`
-5. Connect to your washing machine / EV charger automation
+Example: Contract comparison
 
-### Example: Contract comparison
+Operation: Best Energy Contract
+Zone: DE
+Consumption: 3500 kWh/year
 
-1. Operation: `Best Energy Contract`
-2. Zone: `DE`
-3. Consumption: `3500` kWh/year
+Links
 
-## Links
+API docs: elecz.com/docs
+MCP server: elecz.com/mcp
+GitHub: zemloai-ctrl/n8n-nodes-elecz
 
-- API docs: [elecz.com/docs](https://elecz.com/docs)
-- MCP server: [elecz.com/mcp](https://elecz.com/mcp)
-- GitHub: [zemloai-ctrl/n8n-nodes-elecz](https://github.com/zemloai-ctrl/n8n-nodes-elecz)
-
-## License
-
+License
 MIT
