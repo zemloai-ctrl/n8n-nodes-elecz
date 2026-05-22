@@ -14,7 +14,7 @@ export class Elecz implements INodeType {
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"]}}',
-		description: 'Real-time electricity price signals for 40+ countries across Europe, North America, Asia, and Oceania. No API key required.',
+		description: 'Real-time electricity price signals for 40+ countries across Europe, North America, Africa, Asia, and Oceania. No API key required.',
 		defaults: {
 			name: 'Elecz',
 		},
@@ -118,6 +118,21 @@ export class Elecz implements INodeType {
 					{ name: 'USA — New York NYC', value: 'US-NY-NYC' },
 					{ name: 'USA — New York West', value: 'US-NY-WEST' },
 					{ name: 'USA — New York Long Island', value: 'US-NY-LONGIL' },
+					// Mexico
+					{ name: 'Mexico — Aguascalientes (MX-AGS)', value: 'MX-AGS' },
+					{ name: 'Mexico — Monterrey (MX-MTY)', value: 'MX-MTY' },
+					{ name: 'Mexico — Guadalajara (MX-GDL)', value: 'MX-GDL' },
+					{ name: 'Mexico — Puebla (MX-PUE)', value: 'MX-PUE' },
+					{ name: 'Mexico — Veracruz (MX-VER)', value: 'MX-VER' },
+					{ name: 'Mexico — Chihuahua (MX-CHH)', value: 'MX-CHH' },
+					{ name: 'Mexico — Hermosillo (MX-HMO)', value: 'MX-HMO' },
+					{ name: 'Mexico — Merida (MX-MID)', value: 'MX-MID' },
+					{ name: 'Mexico — Culiacan (MX-CUL)', value: 'MX-CUL' },
+					{ name: 'Mexico — Leon (MX-LEO)', value: 'MX-LEO' },
+					{ name: 'Mexico — Queretaro (MX-QRO)', value: 'MX-QRO' },
+					{ name: 'Mexico — Morelia (MX-MLM)', value: 'MX-MLM' },
+					{ name: 'Mexico — Oaxaca (MX-OAX)', value: 'MX-OAX' },
+					{ name: 'Mexico — Cancun (MX-CUN)', value: 'MX-CUN' },
 					// Asia
 					{ name: 'South Korea (KR)', value: 'KR' },
 					{ name: 'South Korea — Jeju Island', value: 'KR-JEJU' },
@@ -146,7 +161,7 @@ export class Elecz implements INodeType {
 					{ name: 'New Zealand — South Island', value: 'NZ-SI' },
 				],
 				default: 'FI',
-				description: 'Electricity price zone. 40+ countries across Europe, North America, Asia, and Oceania.',
+				description: 'Electricity price zone. 40+ countries across Europe, North America, Africa, Asia, and Oceania.',
 				displayOptions: {
 					show: {
 						operation: ['spot_price', 'cheapest_hours', 'best_energy_contract'],
